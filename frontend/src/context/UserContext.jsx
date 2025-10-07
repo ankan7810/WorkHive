@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {io} from "socket.io-client"
 
-export let socket=io("http://localhost:8000");
+export let socket=io("https://workhive-1-f4m7.onrender.com");
 
 export const userDataContext=createContext()
 
