@@ -2,6 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { authDataContext } from './AuthContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {io} from "socket.io-client"
+
+export let socket=io("http://localhost:8000");
+
 export const userDataContext=createContext()
 
 function UserContext({children}) {
@@ -27,7 +31,7 @@ const getPost=async ()=>{
     let result=await axios.get(serverUrl+"/api/post/getpost",{
       withCredentials:true
     })
-    console.log(result)
+    console.log(result.data)
     setPostData(result.data)
    
   } catch (error) {
@@ -47,13 +51,10 @@ const handleGetProfile=async (userName)=>{
    }
 }
 
-
-
 useEffect(() => {
 getCurrentUser();
  getPost()
 }, []);
-
 
     const value={
         userData,setUserData,edit,setEdit,postData,setPostData,getPost,handleGetProfile,profileData,setProfileData
